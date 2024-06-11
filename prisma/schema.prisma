@@ -1,0 +1,59 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+//  title:{type:String,required:true},
+//     description:{type:String},
+//     location:{type:String},
+//     createdAt:{type:Date,default:Date.now},
+//     imageUrl:{type:String,required:true},
+//     startDateTime:{type:Date,default:Date.now},
+//     endDateTime:{type:Date,default:Date.now},
+//     price:{type:String},
+//     isFree:{type:Boolean,default:false},
+//     url:{type:String},
+//     category:{type:Schema.Types.ObjectId, ref:'Category'},
+//     organizer:{type:Schema.Types.ObjectId,ref:'User'},
+// })
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+model Event {
+  id             Int      @id @default(autoincrement())
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+  title          String   @db.VarChar(255)
+  description    String
+  imageUrl       String
+  startDateTime  DateTime
+  endDateTime    DateTime
+  price          String?
+  isFree         Boolean?
+  url            String
+  categoryId     Int
+  category       Category @relation(fields: [categoryId], references: [id])
+  author User @relation(fields: [authorId],references: [id])
+  authorId Int
+}
+
+model Category {
+  id    Int    @id @default(autoincrement())
+  name  String @db.VarChar(255) @unique
+  events Event[]
+}
+
+model User {
+  id Int @id @default(autoincrement())
+  username String @unique
+  email String @unique
+  firstName String
+  lastName String
+  photo String?
+  events Event[]
+}
