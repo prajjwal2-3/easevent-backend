@@ -3,14 +3,14 @@ const prisma = new PrismaClient();
 
 const newuser = await prisma.user.create({
   data:{
-    username:'vaibhav65',
-    firstName:'vaibhav',
-    lastName:'sharma',
-    email:'vaibhav@45'
+    username:'vaibhtetyrtykhav656t',
+    firstName:'verhetytjyhggav',
+    lastName:'shaithryjrtyjethbnkrma',
+    email:'vaibthrtntytjyythrhav@45'
   }
 })
 
 console.log(newuser)
 
 const alluser = await prisma.user.findMany()
-console.log(alluser)
+console.log(alluser.length)
