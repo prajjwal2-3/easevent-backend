@@ -30,14 +30,22 @@ export const find_User = async (req:any,res:any)=>{
   const { username } = req.body;
   console.log('Username:', username); 
   try{
+    if (!username) {
+      throw new Error('Username is required');
+    }
     const user = await prisma.user.findUnique({
       where:{
         username
       }
     })
-    return res.status(200).send("user found "+ user );
+    if(user){
+      return res.status(200).json(user);
+    }else{
+      return res.status(404).send('user not found')
+    }
+    
   }catch(error){
     console.error(error);
-    return res.status(500).json({ error: 'Internal server error' });
+    return res.status(500).json(error);
   }
 }
