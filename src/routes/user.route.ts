@@ -1,6 +1,6 @@
 import express from 'express'
 const route = express.Router()
-import { add_User,find_User } from '../controllers/user/add_User'
+import { add_User,find_User } from '../controllers/user/User'
 route.post('/addUser', add_User)
 route.post('/findUser',find_User)
 

@@ -4,7 +4,7 @@ import { PrismaClient } from '@prisma/client';
 const prisma = new PrismaClient();
 
 export const add_User = async (req:any, res:any) => {
-  console.log('Request Body:', req); 
+  console.log('Request Body:', req.body); 
   const { email, firstName, lastName, username, photo } = req.body;
 
   try {

@@ -1,4 +1,6 @@
 import express from 'express'
 const route = express.Router()
-import { add_User } from '../controllers/user/add_User'
-route.post('/addEvent', add_User)
+import { add_Event } from '../controllers/event/Event'
+route.post('/addEvent', add_Event)
+
+export default route
